@@ -1,0 +1,6 @@
+framework module Pods_MoviesBlue {
+  umbrella header "Pods-MoviesBlue-umbrella.h"
+
+  export *
+  module * { export * }
+}
