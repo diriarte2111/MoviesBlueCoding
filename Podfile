@@ -9,5 +9,6 @@ target 'MoviesBlue' do
     pod 'SwiftyJSON'
     pod 'Alamofire'
     pod 'AlamofireImage'
+    pod 'LGSideMenuController'
 
 end

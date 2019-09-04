@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B71332A2320377C00E8F261 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7133292320377C00E8F261 /* MenuViewController.swift */; };
 		1BAAE202231EB291007D854E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAAE201231EB291007D854E /* AppDelegate.swift */; };
 		1BAAE207231EB291007D854E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BAAE205231EB291007D854E /* Main.storyboard */; };
 		1BAAE20A231EB291007D854E /* MoviesBlue.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1BAAE208231EB291007D854E /* MoviesBlue.xcdatamodeld */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B7133292320377C00E8F261 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		1BAAE1FE231EB291007D854E /* MoviesBlue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesBlue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BAAE201231EB291007D854E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BAAE206231EB291007D854E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				1BAAE28E231F1D3F007D854E /* MovieCollectionViewCell.swift */,
 				1BAAE293231F23E7007D854E /* MovieDetailViewController.swift */,
 				1BC4475C231FF1D800DF6970 /* WatchListViewController.swift */,
+				1B7133292320377C00E8F261 /* MenuViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-MoviesBlue/Pods-MoviesBlue-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/LGSideMenuController/LGSideMenuController.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -232,6 +236,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LGSideMenuController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,6 +277,7 @@
 				1BAAE20A231EB291007D854E /* MoviesBlue.xcdatamodeld in Sources */,
 				1BAAE202231EB291007D854E /* AppDelegate.swift in Sources */,
 				1BAAE21A231EB2F6007D854E /* FavoritesViewController.swift in Sources */,
+				1B71332A2320377C00E8F261 /* MenuViewController.swift in Sources */,
 				1BAAE28C231F1CE5007D854E /* Movie+CoreDataClass.swift in Sources */,
 				1BAAE28F231F1D3F007D854E /* MovieCollectionViewCell.swift in Sources */,
 				1BAAE28D231F1CE5007D854E /* Movie+CoreDataProperties.swift in Sources */,

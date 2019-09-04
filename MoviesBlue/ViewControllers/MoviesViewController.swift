@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LGSideMenuController
 
 class MoviesViewController: UIViewController {
     
@@ -30,11 +31,11 @@ class MoviesViewController: UIViewController {
         super.viewDidLoad()
         title = "Movies"
         
+        //Left menu width setup
+        let screenSize = UIScreen.main.bounds
+        self.sideMenuController?.leftViewWidth = ((screenSize.width)*2)/3
         
-        let button = UIButton.init(type: .custom)
-        button.setImage(UIImage.init(named: "watchlist_icon"), for: .normal)
-        button.addTarget(self, action: #selector(buttonTouched), for:.touchUpInside)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: button)
+        self.sideMenuController?.leftViewPresentationStyle = .slideAbove
         
         let search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self
@@ -54,11 +55,6 @@ class MoviesViewController: UIViewController {
         moviesCollectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         
         getInfo()
-    }
-    
-    @objc func buttonTouched(_ button:UIButton){
-        let watchListVC = WatchListViewController.init()
-        present(watchListVC, animated: true, completion: nil)
     }
     
     func getInfo(){
@@ -112,6 +108,10 @@ class MoviesViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             self?.getInfo()
         }
+    }
+    
+    @IBAction func showMenu(_ sender: Any) {
+        self.sideMenuController?.showLeftView(animated: true, completionHandler: nil)
     }
 }
 

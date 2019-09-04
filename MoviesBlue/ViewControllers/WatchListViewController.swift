@@ -23,7 +23,7 @@ class WatchListViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         
         titleLabel = UILabel.init()
-        titleLabel.text = "Watchlist"
+        titleLabel.text = "Watch List"
         titleLabel.textColor = UIColor.black
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont(name: "HelveticaRoundedLTStd-BdCn", size: 15)

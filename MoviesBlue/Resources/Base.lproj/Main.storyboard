@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I0M-Pu-BYO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RcM-Yc-Oqi">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -43,7 +43,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="tM6-Kz-HfW"/>
+                    <navigationItem key="navigationItem" id="tM6-Kz-HfW">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="menu_icon" id="Lpv-n6-67C">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="showMenu:" destination="BYZ-38-t0r" id="2Jv-YY-J9m"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="moviesCollectionView" destination="BmT-7t-l3k" id="4jE-Y8-Kco"/>
                         <segue destination="apJ-dG-Tsx" kind="show" identifier="showMovieDetail" id="X5G-D6-CfB"/>
@@ -51,7 +58,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1971.0144927536232" y="-18.080357142857142"/>
+            <point key="canvasLocation" x="1971" y="-99"/>
         </scene>
         <!--Favorites View Controller-->
         <scene sceneID="55d-TV-NDO">
@@ -62,7 +69,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Jrh-G0-2q8">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="681"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Can-h8-Sxb">
                                     <size key="itemSize" width="50" height="50"/>
@@ -86,7 +93,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TX4-bM-PNm"/>
                     </view>
-                    <navigationItem key="navigationItem" id="6AG-Pg-ckm"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="dwW-26-7nB">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="menu_icon" id="uP4-If-bic">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="showMenu:" destination="JHh-qS-yHl" id="aOM-gT-xwU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="moviesCollectionView" destination="Jrh-G0-2q8" id="CV6-kV-gLP"/>
                         <segue destination="apJ-dG-Tsx" kind="show" identifier="showMovieDetail" id="p6U-ML-ao6"/>
@@ -95,6 +111,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tqA-Hy-ZmV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1971.0144927536232" y="645.53571428571422"/>
+        </scene>
+        <!--Side Menu Controller-->
+        <scene sceneID="8j0-im-xDc">
+            <objects>
+                <viewController id="RcM-Yc-Oqi" customClass="LGSideMenuController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fzg-HZ-5jF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="H1W-Zi-bkT"/>
+                    </view>
+                    <connections>
+                        <segue destination="I0M-Pu-BYO" kind="custom" identifier="root" customClass="LGSideMenuSegue" id="L6R-DF-XyZ"/>
+                        <segue destination="O0o-GD-N16" kind="custom" identifier="left" customClass="LGSideMenuSegue" id="sji-gW-3PT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ytz-ew-w4L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-928" y="134"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="3UQ-Gc-faM">
@@ -122,6 +157,42 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="133.92857142857142"/>
         </scene>
+        <!--Menu View Controller-->
+        <scene sceneID="ltq-OZ-Xw8">
+            <objects>
+                <viewController id="vOW-4P-Nlj" customClass="MenuViewController" customModule="MoviesBlue" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Lrr-Sb-s4s">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ft9-4k-Lcb">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="vOW-4P-Nlj" id="caY-7n-qab"/>
+                                    <outlet property="delegate" destination="vOW-4P-Nlj" id="P1m-2b-7Xu"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="9aE-u6-BTH" firstAttribute="trailing" secondItem="ft9-4k-Lcb" secondAttribute="trailing" id="CZl-Sa-PSe"/>
+                            <constraint firstItem="ft9-4k-Lcb" firstAttribute="bottom" secondItem="9aE-u6-BTH" secondAttribute="bottom" constant="34" id="H5y-jj-7U8"/>
+                            <constraint firstItem="ft9-4k-Lcb" firstAttribute="top" secondItem="9aE-u6-BTH" secondAttribute="top" id="VNI-EK-IKN"/>
+                            <constraint firstItem="9aE-u6-BTH" firstAttribute="leading" secondItem="ft9-4k-Lcb" secondAttribute="leading" id="oKW-D3-MeU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9aE-u6-BTH"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="drV-F2-Rts"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="ft9-4k-Lcb" id="M9t-he-bid"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Ev-49-gqg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1080" y="-808"/>
+        </scene>
         <!--Movies-->
         <scene sceneID="K6g-iC-l7Z">
             <objects>
@@ -139,7 +210,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UTx-YP-4mb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1060.8695652173915" y="-18.080357142857142"/>
+            <point key="canvasLocation" x="1081" y="-99"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="7VS-mO-pWo">
@@ -158,7 +229,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xx7-I5-zBj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1060.8695652173915" y="645.53571428571422"/>
+            <point key="canvasLocation" x="1080" y="646"/>
         </scene>
         <!--Movie Detail View Controller-->
         <scene sceneID="UZT-Bc-ZQ8">
@@ -228,14 +299,33 @@
                 <barButtonItem title="Item" id="BGk-rj-Y8c"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Jj-VH-z4C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2911.594202898551" y="-18.080357142857142"/>
+            <point key="canvasLocation" x="3280" y="-85"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Gaa-Y8-uDt">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="O0o-GD-N16" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ADy-do-85T">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vOW-4P-Nlj" kind="relationship" relationship="rootViewController" id="pcn-4k-fKX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yVb-kO-8TL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="-808"/>
         </scene>
     </scenes>
     <resources>
         <image name="favorite_selected" width="32" height="32"/>
+        <image name="menu_icon" width="18" height="15"/>
         <image name="movies_icon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="X5G-D6-CfB"/>
+        <segue reference="p6U-ML-ao6"/>
     </inferredMetricsTieBreakers>
 </document>
