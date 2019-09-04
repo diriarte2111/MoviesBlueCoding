@@ -25,3 +25,13 @@ Two tab sections:
 Menu section:
 
 1) Watch list: You will access the watch list from here, you will see a table with the titles that you added to this list.
+
+
+MovieRepository
+
+This class is in charge of all the calls either API or from local dataBase.
+
+getAllMovies - will load all the movies according to page we will pass as argument, it will handle to load from local dataBase or call the API
+getAllFavoriteMovies - will load all the movies your marked as favorites.
+getAllWatchListMovies - will load all the movies added to watch list.
+
