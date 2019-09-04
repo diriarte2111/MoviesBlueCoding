@@ -15,9 +15,19 @@ class WatchListViewController: UIViewController {
     var separatorLine : UIView!
     var tableView : UITableView!
     var noItemsAddedLabel : UILabel!
+    var repository : MovieRepository!
     
     var movies : [Movie] = []
-
+    
+    init(repository: MovieRepository) {
+        super.init(nibName: nil, bundle: nil)
+        self.repository = repository
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,8 +63,8 @@ class WatchListViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         self.view.addSubview(tableView)
-        
-        movies = MovieRepository.getAllWatchListMovies()
+    
+        movies = repository.getAllWatchListMovies()
         tableView.isHidden = (movies.count == 0)
     }
     
@@ -81,13 +91,11 @@ extension WatchListViewController : UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return 60
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let movie = movies[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.selectionStyle = .none

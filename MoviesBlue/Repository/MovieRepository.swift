@@ -174,7 +174,7 @@ class MovieRepository {
         }
     }
     
-    class func getAllWatchListMovies () -> [Movie] {
+    func getAllWatchListMovies () -> [Movie] {
         var movies : [Movie] = []
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {

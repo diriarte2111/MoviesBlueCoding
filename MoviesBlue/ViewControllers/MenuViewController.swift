@@ -44,7 +44,10 @@ extension MenuViewController : UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let watchListVC = WatchListViewController.init()
-        present(watchListVC, animated: true, completion: nil)
+        
+        let movieRepo = MovieRepository()
+        let watchListVC = WatchListViewController.init(repository: movieRepo)
+        
+        self.sideMenuController?.rootViewController?.present(watchListVC, animated: true, completion: nil)
     }
 }
