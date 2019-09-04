@@ -13,7 +13,7 @@ class FavoritesViewController: MoviesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Favorites"
-        hideFavorite = true
+        isFavorite = true
     }
     
     override func viewWillAppear(_ animated: Bool) {

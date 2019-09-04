@@ -13,24 +13,48 @@ import Alamofire
 
 class MovieRepository {
     
-    class func getAllMovies(completionHandler: @escaping ([Movie]) -> Void ){
+    class func getAllMovies(pageNumber: Int16, completionHandler: @escaping ([Movie]) -> Void ){
         var movies : [Movie] = []
         
-        movies = getAllMoviesFromDataBase()
+        movies = getMoviesFromDataBase(pageNumber: pageNumber)
         
         if movies.count == 0 {
             let handlerBlockUser: ([Movie]) -> Void = { moviesArray in
                 completionHandler(moviesArray)
             }
             
-            self.getMoviesFromAPI(completionHandler: handlerBlockUser)
+            self.getMoviesFromAPI(pageNumber: pageNumber, completionHandler: handlerBlockUser)
             
         }else{
+            movies = getAllMoviesFromDataBase()
             completionHandler(movies)
         }
     }
     
-    class func getAllMoviesFromDataBase () -> [Movie] {
+    class func getMoviesFromDataBase(pageNumber:Int16) -> [Movie] {
+        var movies : [Movie] = []
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return movies
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Movie")
+        
+        fetchRequest.predicate = NSPredicate(format: "pageNumber == \(pageNumber)")
+        
+        do {
+            movies = try managedContext.fetch(fetchRequest) as! [Movie]
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return movies
+    }
+    
+    class func getAllMoviesFromDataBase() -> [Movie] {
         var movies : [Movie] = []
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
@@ -51,14 +75,15 @@ class MovieRepository {
         return movies
     }
     
-    class func getMoviesFromAPI(completionHandler: @escaping ([Movie]) -> Void ){
-        let url = "https://api.themoviedb.org/3/discover/movie?api_key=e0f8cd821313d7bf4362d6fab32ae53e&sort_by=primary_release_date.desc&include_adult=false&include_video=false&primary_release_date.gte=2019-01-01&primary_release_date.lte=2019-07-31&with_release_type=1&year=2019"
+    class func getMoviesFromAPI(pageNumber: Int16, completionHandler: @escaping ([Movie]) -> Void ){
+        var url = "https://api.themoviedb.org/3/discover/movie?api_key=e0f8cd821313d7bf4362d6fab32ae53e&sort_by=primary_release_date.desc&include_adult=false&include_video=false&primary_release_date.gte=2019-01-01&primary_release_date.lte=2019-07-31&with_release_type=1&year=2019"
+        url = url + "&page=\(pageNumber)"
         Alamofire.request(url, method: .get)
             .responseJSON { response in
                 if response.result.isSuccess {
                     let moviesJSON : JSON = JSON(response.result.value!)
                     for movie in moviesJSON["results"].arrayValue {
-                        self.addMovie(movieJson: movie)
+                        self.addMovie(movieJson: movie, pageNumber: moviesJSON["page"].number!.int16Value)
                     }
                     let movie = getAllMoviesFromDataBase()
                     completionHandler(movie)
@@ -68,7 +93,7 @@ class MovieRepository {
         }
     }
     
-    private class func addMovie(movieJson: JSON) {
+    private class func addMovie(movieJson: JSON, pageNumber : Int16) {
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
                 return
@@ -88,6 +113,7 @@ class MovieRepository {
         movie.poster_path = movieJson["poster_path"].string
         movie.vote_average = movieJson["vote_average"].number?.doubleValue ?? 0
         movie.movieId = movieJson["id"].number?.int64Value ?? 0
+        movie.pageNumber = pageNumber
         
         do {
             try managedContext.save()

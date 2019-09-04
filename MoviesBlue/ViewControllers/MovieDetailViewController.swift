@@ -43,7 +43,8 @@ class MovieDetailViewController: UIViewController {
         
         title = movie.title
         imageURL = movie.poster_path
-        synopsisTextView.text = movie.overview
+        synopsisTextView.text = movie.overview!.count > 0 ? movie.overview : "NO SYNOPSIS AVAILABLE"
+        synopsisTextView.textAlignment = movie.overview!.count > 0 ? NSTextAlignment.left : NSTextAlignment.center
         rateLabel.text = String(movie.vote_average)
     }
 }

@@ -12,13 +12,17 @@ class MoviesViewController: UIViewController {
     
     var movies : [Movie] = []
     
-    var hideFavorite : Bool! = false
+    var isFavorite : Bool! = false
     
     var selectedMovie : Movie!
     
     fileprivate var searching = false
     
     var filteredMovies : [Movie] = []
+    
+    var pageNumber = 1
+    
+    fileprivate var isWaiting = false
 
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     
@@ -44,7 +48,6 @@ class MoviesViewController: UIViewController {
         moviesCollectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         
         getInfo()
-        
     }
     
     func getInfo(){
@@ -53,7 +56,7 @@ class MoviesViewController: UIViewController {
             self.moviesCollectionView.reloadData()
         }
         
-        MovieRepository.getAllMovies(completionHandler: handlerBlockUser)
+        MovieRepository.getAllMovies(pageNumber:Int16(pageNumber), completionHandler: handlerBlockUser)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,15 +75,13 @@ class MoviesViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc func keyboardWillShow(notification: NSNotification)
-    {
+    @objc func keyboardWillShow(notification: NSNotification){
         var info = notification.userInfo!
         let keyboardSize = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size
         let contentInsets : UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize!.height - self.tabBarController!.tabBar.frame.height, right: 0.0)
         moviesCollectionView.contentInset = contentInsets
         moviesCollectionView.scrollIndicatorInsets = contentInsets
     }
-    
     
     @objc func keyboardWillHide(notification: NSNotification){
         let contentInsets : UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0,bottom: 0.0, right: 0.0)
@@ -92,6 +93,13 @@ class MoviesViewController: UIViewController {
         if segue.identifier == "showMovieDetail" {
             let destinationVC = segue.destination as! MovieDetailViewController
             destinationVC.movie = selectedMovie
+        }
+    }
+    
+    private func doPaging() {
+        isWaiting = false
+        DispatchQueue.main.async { [weak self] in
+            self?.getInfo()
         }
     }
 }
@@ -107,9 +115,21 @@ extension MoviesViewController : UICollectionViewDelegate, UICollectionViewDataS
         
         cell.movieObject = self.searching ? self.filteredMovies[indexPath.row] : movies[indexPath.row]
         
-        cell.favoriteButton.isHidden = hideFavorite
+        cell.favoriteButton.isHidden = isFavorite
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    
+        if self.searching || self.isFavorite { return }
+
+        if indexPath.row == self.movies.count - 2 && !isWaiting {
+            isWaiting = true
+            let movie = movies[indexPath.row]
+            self.pageNumber = Int(movie.pageNumber) + 1
+            self.doPaging()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -121,7 +141,7 @@ extension MoviesViewController : UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedMovie = movies[indexPath.row]
+        selectedMovie = self.searching ? self.filteredMovies[indexPath.row] : movies[indexPath.row]
         self.performSegue(withIdentifier: "showMovieDetail", sender: self)
     }
 }
