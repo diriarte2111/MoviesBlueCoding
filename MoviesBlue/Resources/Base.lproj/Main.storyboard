@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BmT-7t-l3k">
-                                <rect key="frame" x="0.0" y="86" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eNu-zu-tyu">
                                     <size key="itemSize" width="50" height="50"/>
@@ -38,8 +38,8 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BmT-7t-l3k" secondAttribute="trailing" id="NaV-Iu-avp"/>
                             <constraint firstItem="BmT-7t-l3k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="fD1-AC-Mdy"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="BmT-7t-l3k" secondAttribute="top" constant="2" id="w74-Ls-VET"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="BmT-7t-l3k" secondAttribute="bottom" constant="2" id="xbC-Aq-HUf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="BmT-7t-l3k" secondAttribute="top" id="w74-Ls-VET"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="BmT-7t-l3k" secondAttribute="bottom" id="xbC-Aq-HUf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -163,13 +163,13 @@
         <!--Movie Detail View Controller-->
         <scene sceneID="UZT-Bc-ZQ8">
             <objects>
-                <viewController id="apJ-dG-Tsx" customClass="MovieDetailViewController" customModule="MovieUI" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="apJ-dG-Tsx" customClass="MovieDetailViewController" customModule="MoviesBlue" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tSh-TX-mLy">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qdX-It-SAD">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="681"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" scrollEnabled="NO" editable="NO" text="Demo text" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T8w-Rd-6XE">
                                         <rect key="frame" x="10" y="368" width="396" height="37.5"/>
@@ -196,7 +196,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="yzU-52-wwn" firstAttribute="top" secondItem="qdX-It-SAD" secondAttribute="top" constant="20" id="2DX-Xf-dat"/>
-                                    <constraint firstAttribute="bottom" secondItem="T8w-Rd-6XE" secondAttribute="bottom" constant="5" id="L8v-sC-etV"/>
+                                    <constraint firstAttribute="bottom" secondItem="T8w-Rd-6XE" secondAttribute="bottom" id="L8v-sC-etV"/>
                                     <constraint firstItem="T8w-Rd-6XE" firstAttribute="top" secondItem="yzU-52-wwn" secondAttribute="bottom" constant="28" id="Sqb-Au-Vaa"/>
                                     <constraint firstItem="j8p-fJ-guy" firstAttribute="leading" secondItem="yzU-52-wwn" secondAttribute="trailing" constant="5" id="T7U-As-GcX"/>
                                     <constraint firstItem="j8p-fJ-guy" firstAttribute="top" secondItem="qdX-It-SAD" secondAttribute="top" constant="20" id="Wu1-la-UD6"/>
@@ -216,15 +216,19 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5Au-tC-sZ5"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="imageView" destination="yzU-52-wwn" id="97x-vO-sq4"/>
                         <outlet property="rateLabel" destination="j8p-fJ-guy" id="lWY-Nx-Ucz"/>
                         <outlet property="synopsisTextView" destination="T8w-Rd-6XE" id="s4d-PH-IQ3"/>
                     </connections>
                 </viewController>
+                <barButtonItem title="Item" id="BGk-rj-Y8c"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Jj-VH-z4C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2912" y="-18"/>
+            <point key="canvasLocation" x="2911.594202898551" y="-18.080357142857142"/>
         </scene>
     </scenes>
     <resources>
@@ -232,6 +236,6 @@
         <image name="movies_icon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="p6U-ML-ao6"/>
+        <segue reference="X5G-D6-CfB"/>
     </inferredMetricsTieBreakers>
 </document>

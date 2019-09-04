@@ -30,6 +30,12 @@ class MoviesViewController: UIViewController {
         super.viewDidLoad()
         title = "Movies"
         
+        
+        let button = UIButton.init(type: .custom)
+        button.setImage(UIImage.init(named: "watchlist_icon"), for: .normal)
+        button.addTarget(self, action: #selector(buttonTouched), for:.touchUpInside)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: button)
+        
         let search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self
         search.obscuresBackgroundDuringPresentation = false
@@ -48,6 +54,11 @@ class MoviesViewController: UIViewController {
         moviesCollectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         
         getInfo()
+    }
+    
+    @objc func buttonTouched(_ button:UIButton){
+        let watchListVC = WatchListViewController.init()
+        present(watchListVC, animated: true, completion: nil)
     }
     
     func getInfo(){

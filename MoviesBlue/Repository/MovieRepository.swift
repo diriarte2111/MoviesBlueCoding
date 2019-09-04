@@ -173,4 +173,55 @@ class MovieRepository {
             print("Could not save. \(error), \(error.userInfo)")
         }
     }
+    
+    class func getAllWatchListMovies () -> [Movie] {
+        var movies : [Movie] = []
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return movies
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Movie")
+        
+        fetchRequest.predicate = NSPredicate(format: "isInWatchlist == 1")
+        
+        do {
+            movies = try managedContext.fetch(fetchRequest) as! [Movie]
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return movies
+    }
+    
+    class func saveToWatchlist(_ addOrRemove:Bool, movieId: Int64) {
+        
+        var movie : Movie!
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Movie")
+        
+        fetchRequest.predicate = NSPredicate(format: "movieId == \(movieId)")
+        
+        do {
+            let movies = try managedContext.fetch(fetchRequest) as! [Movie]
+            movie = movies.first
+            movie.isInWatchlist = addOrRemove
+            try managedContext.save()
+        }catch let error as NSError{
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
 }

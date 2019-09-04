@@ -17,6 +17,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     var titleLabel : UILabel!
     let baseURL = "https://image.tmdb.org/t/p/w500/"
     var favoriteButton : UIButton!
+    var watchListButton : UIButton!
     
     var imageURL : String!{
         willSet{
@@ -40,6 +41,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
             self.ratingLabel.text = String(newValue.vote_average)
             self.imageURL = newValue.poster_path
             self.favoriteButton.isSelected = newValue.isFavorite
+            self.watchListButton.isSelected = newValue.isInWatchlist
+            self.watchListButton.backgroundColor = (newValue.isInWatchlist) ? UIColor.green.withAlphaComponent(0.5) : UIColor.white.withAlphaComponent(0.5)
         }
     }
     
@@ -55,7 +58,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         
         titleLabel = UILabel.init()
         titleLabel.backgroundColor = UIColor.clear
-        titleLabel.textColor = UIColor.white//UIColor.init(red: 161/255, green: 116/255, blue: 46/255, alpha: 1)
+        titleLabel.textColor = UIColor.white
         titleLabel.textAlignment = .left
         titleLabel.numberOfLines = 0
         titleLabel.minimumScaleFactor = 0.5
@@ -71,6 +74,13 @@ class MovieCollectionViewCell: UICollectionViewCell {
         favoriteButton.addTarget(self, action: #selector(favoriteButtonTouched), for:.touchUpInside)
         contentView.addSubview(favoriteButton)
         
+        watchListButton = UIButton.init(type: .custom)
+        watchListButton.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        watchListButton.layer.shadowColor = UIColor.black.cgColor
+        watchListButton.setImage(UIImage.init(named: "watchlist_icon"), for: .normal)
+        watchListButton.addTarget(self, action: #selector(watchListTouched), for:.touchUpInside)
+        contentView.addSubview(watchListButton)
+        
         ratingLabel = UILabel.init()
         ratingLabel.backgroundColor = UIColor.clear
         ratingLabel.textColor = UIColor.white
@@ -81,9 +91,14 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func favoriteButtonTouched(_ button:UIButton){
-        print("Touched favorite")
         button.isSelected = !button.isSelected
         MovieRepository.saveAsFavorite(button.isSelected, movieId: movieObject.movieId)
+    }
+    
+    @objc func watchListTouched(_ button:UIButton){
+        button.isSelected = !button.isSelected
+        button.backgroundColor = (button.isSelected) ? UIColor.green.withAlphaComponent(0.5) : UIColor.white.withAlphaComponent(0.5)
+        MovieRepository.saveToWatchlist(button.isSelected, movieId: movieObject.movieId)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -93,9 +108,17 @@ class MovieCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         imageView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 250)
-        favoriteButton.frame = CGRect (x:self.frame.width - 35, y:5, width: 30, height: 30)
+        watchListButton.frame = CGRect(x: 5, y: 5, width: 35, height: 35)
+        watchListButton.layer.cornerRadius = watchListButton.frame.height/2
+        favoriteButton.frame = CGRect (x:self.frame.width - 40, y:5, width: 35, height: 35)
+        favoriteButton.layer.cornerRadius = favoriteButton.frame.height/2
         let originY : CGFloat = imageView.frame.maxY
         ratingLabel.frame = CGRect(x:self.frame.width - 38, y: originY, width: 35, height:self.frame.size.height - originY)
         titleLabel.frame = CGRect(x: 0, y: originY, width:ratingLabel.frame.origin.x, height: self.frame.size.height - originY)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        watchListButton.backgroundColor = UIColor.white.withAlphaComponent(0.5)
     }
 }

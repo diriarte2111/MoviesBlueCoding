@@ -19,9 +19,10 @@ extension Movie {
     @NSManaged public var isFavorite: Bool
     @NSManaged public var movieId: Int64
     @NSManaged public var overview: String?
+    @NSManaged public var pageNumber: Int16
     @NSManaged public var poster_path: String?
     @NSManaged public var title: String?
     @NSManaged public var vote_average: Double
-    @NSManaged public var pageNumber: Int16
+    @NSManaged public var isInWatchlist: Bool
 
 }
