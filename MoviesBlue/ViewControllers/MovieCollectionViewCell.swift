@@ -21,8 +21,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
     var imageURL : String!{
         willSet{
             guard let url = newValue else {
-                print("No tiene poster");
-                
                 self.imageView.image = UIImage.init(named: "no_poster_available")
                 return
             }

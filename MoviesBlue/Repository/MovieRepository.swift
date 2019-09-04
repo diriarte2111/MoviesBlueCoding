@@ -56,10 +56,8 @@ class MovieRepository {
         Alamofire.request(url, method: .get)
             .responseJSON { response in
                 if response.result.isSuccess {
-                    let valueJSON : JSON = JSON(response.result.value!)
-                    for movie in valueJSON["results"].arrayValue {
-                        print(movie["title"].stringValue)
-                        
+                    let moviesJSON : JSON = JSON(response.result.value!)
+                    for movie in moviesJSON["results"].arrayValue {
                         self.addMovie(movieJson: movie)
                     }
                     let movie = getAllMoviesFromDataBase()
@@ -96,7 +94,6 @@ class MovieRepository {
             
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
-            
         }
     }
     
