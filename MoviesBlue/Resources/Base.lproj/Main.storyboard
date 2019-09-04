@@ -46,6 +46,7 @@
                     <navigationItem key="navigationItem" id="tM6-Kz-HfW"/>
                     <connections>
                         <outlet property="moviesCollectionView" destination="BmT-7t-l3k" id="4jE-Y8-Kco"/>
+                        <segue destination="apJ-dG-Tsx" kind="show" identifier="showMovieDetail" id="X5G-D6-CfB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -88,6 +89,7 @@
                     <navigationItem key="navigationItem" id="6AG-Pg-ckm"/>
                     <connections>
                         <outlet property="moviesCollectionView" destination="Jrh-G0-2q8" id="CV6-kV-gLP"/>
+                        <segue destination="apJ-dG-Tsx" kind="show" identifier="showMovieDetail" id="p6U-ML-ao6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tqA-Hy-ZmV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -158,9 +160,78 @@
             </objects>
             <point key="canvasLocation" x="1060.8695652173915" y="645.53571428571422"/>
         </scene>
+        <!--Movie Detail View Controller-->
+        <scene sceneID="UZT-Bc-ZQ8">
+            <objects>
+                <viewController id="apJ-dG-Tsx" customClass="MovieDetailViewController" customModule="MovieUI" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tSh-TX-mLy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qdX-It-SAD">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" scrollEnabled="NO" editable="NO" text="Demo text" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T8w-Rd-6XE">
+                                        <rect key="frame" x="10" y="368" width="396" height="37.5"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8p-fJ-guy">
+                                        <rect key="frame" x="355" y="20" width="35" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="FAB-I2-FWM"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yzU-52-wwn">
+                                        <rect key="frame" x="75" y="20" width="275" height="320"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="320" id="3MR-1C-RXz"/>
+                                            <constraint firstAttribute="width" constant="275" id="NFd-dW-hMO"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="yzU-52-wwn" firstAttribute="top" secondItem="qdX-It-SAD" secondAttribute="top" constant="20" id="2DX-Xf-dat"/>
+                                    <constraint firstAttribute="bottom" secondItem="T8w-Rd-6XE" secondAttribute="bottom" constant="5" id="L8v-sC-etV"/>
+                                    <constraint firstItem="T8w-Rd-6XE" firstAttribute="top" secondItem="yzU-52-wwn" secondAttribute="bottom" constant="28" id="Sqb-Au-Vaa"/>
+                                    <constraint firstItem="j8p-fJ-guy" firstAttribute="leading" secondItem="yzU-52-wwn" secondAttribute="trailing" constant="5" id="T7U-As-GcX"/>
+                                    <constraint firstItem="j8p-fJ-guy" firstAttribute="top" secondItem="qdX-It-SAD" secondAttribute="top" constant="20" id="Wu1-la-UD6"/>
+                                    <constraint firstItem="T8w-Rd-6XE" firstAttribute="centerX" secondItem="qdX-It-SAD" secondAttribute="centerX" constant="1" id="dk2-Ao-rFC"/>
+                                    <constraint firstItem="T8w-Rd-6XE" firstAttribute="leading" secondItem="qdX-It-SAD" secondAttribute="leading" constant="10" id="kAm-7X-f6E"/>
+                                    <constraint firstAttribute="trailing" secondItem="j8p-fJ-guy" secondAttribute="trailing" constant="10" id="uw8-ir-9ON"/>
+                                    <constraint firstItem="yzU-52-wwn" firstAttribute="centerX" secondItem="qdX-It-SAD" secondAttribute="centerX" constant="5.5" id="vBo-65-r0D"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="qdX-It-SAD" firstAttribute="leading" secondItem="5Au-tC-sZ5" secondAttribute="leading" id="1RD-Tp-f7c"/>
+                            <constraint firstItem="qdX-It-SAD" firstAttribute="top" secondItem="5Au-tC-sZ5" secondAttribute="top" id="f8F-dn-EQT"/>
+                            <constraint firstItem="5Au-tC-sZ5" firstAttribute="bottom" secondItem="qdX-It-SAD" secondAttribute="bottom" id="fB3-7v-8aQ"/>
+                            <constraint firstItem="5Au-tC-sZ5" firstAttribute="trailing" secondItem="qdX-It-SAD" secondAttribute="trailing" id="fyv-l8-hOL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5Au-tC-sZ5"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="yzU-52-wwn" id="97x-vO-sq4"/>
+                        <outlet property="rateLabel" destination="j8p-fJ-guy" id="lWY-Nx-Ucz"/>
+                        <outlet property="synopsisTextView" destination="T8w-Rd-6XE" id="s4d-PH-IQ3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Jj-VH-z4C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2912" y="-18"/>
+        </scene>
     </scenes>
     <resources>
         <image name="favorite_selected" width="32" height="32"/>
         <image name="movies_icon" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="p6U-ML-ao6"/>
+    </inferredMetricsTieBreakers>
 </document>

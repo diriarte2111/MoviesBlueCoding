@@ -1,0 +1,49 @@
+//
+//  MovieDetailViewController.swift
+//  MoviesBlue
+//
+//  Created by David Iriarte on 9/3/19.
+//  Copyright © 2019 davidIriarte. All rights reserved.
+//
+
+import UIKit
+import Alamofire
+
+class MovieDetailViewController: UIViewController {
+
+    @IBOutlet weak var imageView: UIImageView!
+    
+    @IBOutlet weak var synopsisTextView: UITextView!
+    
+    @IBOutlet weak var rateLabel: UILabel!
+    
+    let baseURL = "https://image.tmdb.org/t/p/w500/"
+    
+    var movie : Movie!
+    
+    var imageURL : String!{
+        willSet{
+            guard let url = newValue else {
+                self.imageView.image = UIImage.init(named: "no_poster_available")
+                return
+            }
+            
+            let imageCompleteURL = baseURL + url
+            Alamofire.request(imageCompleteURL).responseImage { response in
+                
+                if let image = response.result.value {
+                    self.imageView.image = image
+                }
+            }
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = movie.title
+        imageURL = movie.poster_path
+        synopsisTextView.text = movie.overview
+        rateLabel.text = String(movie.vote_average)
+    }
+}

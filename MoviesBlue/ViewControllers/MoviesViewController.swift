@@ -9,6 +9,12 @@
 import UIKit
 
 class MoviesViewController: UIViewController {
+    
+    var movies : [Movie] = []
+    
+    var hideFavorite : Bool! = false
+    
+    var selectedMovie : Movie!
 
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     
@@ -22,23 +28,41 @@ class MoviesViewController: UIViewController {
         collectionLayout.minimumLineSpacing = 25
         
         moviesCollectionView.collectionViewLayout = collectionLayout
-        moviesCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        moviesCollectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        
+        getInfo()
+        
     }
     
-
+    func getInfo(){
+        let handlerBlockUser: ([Movie]) -> Void = { moviesArray in
+            self.movies = moviesArray
+            self.moviesCollectionView.reloadData()
+        }
+        
+        MovieRepository.getAllMovies(completionHandler: handlerBlockUser)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMovieDetail" {
+            let destinationVC = segue.destination as! MovieDetailViewController
+            destinationVC.movie = selectedMovie
+        }
+    }
 }
-
 
 extension MoviesViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MovieCollectionViewCell
         
-        cell.backgroundColor = UIColor.red
+        cell.movieObject = movies[indexPath.row]
+        
+        cell.favoriteButton.isHidden = hideFavorite
         
         return cell
     }
@@ -49,5 +73,10 @@ extension MoviesViewController : UICollectionViewDelegate, UICollectionViewDataS
         
         
         return CGSize.init(width: (self.view.frame.width - 45)/2, height: 300)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedMovie = movies[indexPath.row]
+        self.performSegue(withIdentifier: "showMovieDetail", sender: self)
     }
 }
