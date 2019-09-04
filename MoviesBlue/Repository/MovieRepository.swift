@@ -114,6 +114,7 @@ class MovieRepository {
         movie.vote_average = movieJson["vote_average"].number?.doubleValue ?? 0
         movie.movieId = movieJson["id"].number?.int64Value ?? 0
         movie.pageNumber = pageNumber
+        movie.release_date = movieJson["release_date"].string
         
         do {
             try managedContext.save()

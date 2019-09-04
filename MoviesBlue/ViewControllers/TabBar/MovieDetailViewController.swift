@@ -17,6 +17,8 @@ class MovieDetailViewController: UIViewController {
     
     @IBOutlet weak var rateLabel: UILabel!
     
+    @IBOutlet weak var releaseDateLabel: UILabel!
+    
     let baseURL = "https://image.tmdb.org/t/p/w500/"
     
     var movie : Movie!
@@ -48,5 +50,11 @@ class MovieDetailViewController: UIViewController {
         synopsisTextView.text = movie.overview!.count > 0 ? movie.overview : "NO SYNOPSIS AVAILABLE"
         synopsisTextView.textAlignment = movie.overview!.count > 0 ? NSTextAlignment.left : NSTextAlignment.center
         rateLabel.text = String(movie.vote_average)
+        
+        guard let release_date = movie.release_date else {
+            releaseDateLabel.text = "Release date: N/A"
+            return
+        }
+        releaseDateLabel.text = "Release date: " + release_date
     }
 }
