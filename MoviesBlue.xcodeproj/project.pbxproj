@@ -58,6 +58,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B71332B232061DD00E8F261 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				1BC4475C231FF1D800DF6970 /* WatchListViewController.swift */,
+				1B7133292320377C00E8F261 /* MenuViewController.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		1B71332C232061F000E8F261 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				1BAAE217231EB2E6007D854E /* MoviesViewController.swift */,
+				1BAAE219231EB2F6007D854E /* FavoritesViewController.swift */,
+				1BAAE28E231F1D3F007D854E /* MovieCollectionViewCell.swift */,
+				1BAAE293231F23E7007D854E /* MovieDetailViewController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		1BAAE1F5231EB291007D854E = {
 			isa = PBXGroup;
 			children = (
@@ -91,12 +111,8 @@
 		1BAAE216231EB2BF007D854E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1BAAE217231EB2E6007D854E /* MoviesViewController.swift */,
-				1BAAE219231EB2F6007D854E /* FavoritesViewController.swift */,
-				1BAAE28E231F1D3F007D854E /* MovieCollectionViewCell.swift */,
-				1BAAE293231F23E7007D854E /* MovieDetailViewController.swift */,
-				1BC4475C231FF1D800DF6970 /* WatchListViewController.swift */,
-				1B7133292320377C00E8F261 /* MenuViewController.swift */,
+				1B71332C232061F000E8F261 /* TabBar */,
+				1B71332B232061DD00E8F261 /* Menu */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
