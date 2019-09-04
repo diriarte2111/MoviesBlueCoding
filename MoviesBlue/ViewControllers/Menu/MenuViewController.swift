@@ -18,6 +18,7 @@ class MenuViewController: UIViewController {
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.separatorStyle = .none
+        tableView.bounces = false
     }
 
 }

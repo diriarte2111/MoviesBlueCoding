@@ -28,6 +28,8 @@ class MovieDetailViewController: UIViewController {
                 return
             }
             
+            self.imageView.image = UIImage.init(named: "image_downloading")
+            
             let imageCompleteURL = baseURL + url
             Alamofire.request(imageCompleteURL).responseImage { response in
                 

@@ -60,8 +60,9 @@ class WatchListViewController: UIViewController {
         tableView = UITableView.init()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.bounces = false
         tableView.separatorStyle = .none
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(WatchListTableViewCell.self, forCellReuseIdentifier: "Cell")
         self.view.addSubview(tableView)
     
         movies = repository.getAllWatchListMovies()
@@ -70,6 +71,12 @@ class WatchListViewController: UIViewController {
     
     @objc func closeButtonTouched(_ button:UIButton){
        self.dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        tableView.flashScrollIndicators()
     }
     
     override func viewWillLayoutSubviews() {
@@ -96,13 +103,11 @@ extension WatchListViewController : UITableViewDataSource, UITableViewDelegate{
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let movie = movies[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.selectionStyle = .none
-        cell.backgroundColor = UIColor.clear
-        cell.textLabel!.text = movie.title
-        cell.textLabel?.numberOfLines = 0
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! WatchListTableViewCell
+        cell.movieTitleLabel.text = movie.title
+        
         return cell
     }
 }
