@@ -14,6 +14,7 @@ class WatchListViewController: UIViewController {
     var closeButton : UIButton!
     var separatorLine : UIView!
     var tableView : UITableView!
+    var noItemsAddedLabel : UILabel!
     
     var movies : [Movie] = []
 
@@ -28,6 +29,14 @@ class WatchListViewController: UIViewController {
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont(name: "HelveticaRoundedLTStd-BdCn", size: 15)
         self.view.addSubview(titleLabel)
+        
+        noItemsAddedLabel = UILabel.init()
+        noItemsAddedLabel.text = "No movies added to watch list."
+        noItemsAddedLabel.numberOfLines = 0
+        noItemsAddedLabel.textColor = UIColor.black
+        noItemsAddedLabel.textAlignment = .center
+        noItemsAddedLabel.font = UIFont(name: "HelveticaRoundedLTStd-BdCn", size: 15)
+        self.view.addSubview(noItemsAddedLabel)
         
         closeButton = UIButton.init(type: .custom)
         closeButton.setImage(UIImage.init(named: "close_icon"), for: .normal)
@@ -46,6 +55,7 @@ class WatchListViewController: UIViewController {
         self.view.addSubview(tableView)
         
         movies = MovieRepository.getAllWatchListMovies()
+        tableView.isHidden = (movies.count == 0)
     }
     
     @objc func closeButtonTouched(_ button:UIButton){
@@ -60,6 +70,7 @@ class WatchListViewController: UIViewController {
         separatorLine.frame = CGRect(x: 0, y: titleLabel.frame.maxY + 5, width: self.view.frame.width, height: 1)
         let originY : CGFloat = separatorLine.frame.maxY
         tableView.frame = CGRect(x: 0, y: originY, width: self.view.frame.width, height: self.view.frame.height - originY)
+        noItemsAddedLabel.frame = tableView.frame
     }
 }
 

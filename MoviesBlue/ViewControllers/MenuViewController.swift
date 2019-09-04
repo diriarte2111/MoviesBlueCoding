@@ -45,8 +45,6 @@ extension MenuViewController : UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let watchListVC = WatchListViewController.init()
-        present(watchListVC, animated: true) {
-            self.sideMenuController?.hideLeftViewAnimated()
-        }
+        present(watchListVC, animated: true, completion: nil)
     }
 }
